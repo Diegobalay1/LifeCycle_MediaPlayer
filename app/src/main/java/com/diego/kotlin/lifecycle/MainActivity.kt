@@ -14,31 +14,39 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.ai_2)
-        mediaPlayer?.start()
+        //mediaPlayer = MediaPlayer.create(this, R.raw.ai_2)
+        //mediaPlayer?.start()
 
         Log.i("LifeCycle", "OnCreate")
     }
 
     override fun onStart() {
         super.onStart()
-        mediaPlayer?.start()
+        mediaPlayer = MediaPlayer.create(this, R.raw.ai_2)
+        //mediaPlayer?.start()
         Log.i("LifeCycle", "OnStart")
     }
 
     override fun onResume() {
         super.onResume()
+        mediaPlayer?.seekTo(position)
+        mediaPlayer?.start()
         Log.i("LifeCycle", "OnResume")
     }
 
     override fun onPause() {
         super.onPause()
         mediaPlayer?.pause()
+        if (mediaPlayer != null)
+            position = mediaPlayer!!.currentPosition
         Log.i("LifeCycle", "OnPause")
     }
 
     override fun onStop() {
         super.onStop()
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
         Log.i("LifeCycle", "OnStop")
     }
 
