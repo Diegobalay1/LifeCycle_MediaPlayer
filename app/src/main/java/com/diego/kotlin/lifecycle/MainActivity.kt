@@ -1,9 +1,11 @@
 package com.diego.kotlin.lifecycle
 
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +15,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        findViewById<MaterialButton>(R.id.btnCheck).setOnClickListener {
+            startActivity(Intent(this, DialogActivity::class.java))
+        }
 
         //mediaPlayer = MediaPlayer.create(this, R.raw.ai_2)
         //mediaPlayer?.start()
